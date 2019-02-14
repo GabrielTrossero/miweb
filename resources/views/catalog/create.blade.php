@@ -11,7 +11,7 @@
          </div>
          <div class="card-body" style="padding:30px">
 
-            <form action="{{ action('CatalogController@getIndex') }}" method="post">
+            <form action="{{ action('CatalogController@postCreate') }}" method="post">
               {{ csrf_field() }}
 
               <div class="form-group">
@@ -43,6 +43,10 @@
                  <button type="submit" class="btn btn-primary" style="padding:8px 100px;margin-top:25px;">
                      Añadir película
                  </button>
+              </div>
+
+              <div class="form-group text-center">
+                <a class="btn btn-default" href="#" role="button">Volver</a>
               </div>
           </form>
 
