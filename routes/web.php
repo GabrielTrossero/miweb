@@ -11,20 +11,23 @@
 |
 */
 
-Route::get('/', 'HomeController@getHome');
+//Route::get('/', 'HomeController@getHome');
 
+/*
 Route::get('login', function(){
   return view('auth.login');
 });
 
 Route::get('logout', function(){
   echo "Logout usuario";
+});*/
+
+Auth::routes();
+
+Route::group(['middleware' => 'auth'], function(){
+  Route::get('catalog', 'CatalogController@getIndex');
+  Route::get('catalog/show/{id}', 'CatalogController@getShow');
+  Route::get('catalog/create', 'CatalogController@getCreate');
+  Route::get('catalog/edit/{id}', 'CatalogController@getEdit');
+  Route::get('/home', 'HomeController@index')->name('home');
 });
-
-Route::get('catalog', 'CatalogController@getIndex');
-
-Route::get('catalog/show/{id}', 'CatalogController@getShow');
-
-Route::get('catalog/create', 'CatalogController@getCreate');
-
-Route::get('catalog/edit/{id}', 'CatalogController@getEdit');
