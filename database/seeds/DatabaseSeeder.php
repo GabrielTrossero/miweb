@@ -2,10 +2,11 @@
 
 use Illuminate\Database\Seeder;
 use App\Movie;  //esto es necesario
+use App\User;  //esto es necesario
 
 class DatabaseSeeder extends Seeder
 {
-    private function seedCatalog(){
+    private function seedCatalog(){//ejercicio 3 de la parte 3
       DB::table('movies')->delete();
 
       foreach($this->arrayPeliculas as $pelicula){
@@ -20,10 +21,30 @@ class DatabaseSeeder extends Seeder
       }
     }
 
+    private function seedUsers(){//ejercicio 2 de la parte 4
+      DB::table('users')->delete();
+
+      //esta es la forma de inserción que da el capitulo CONSTRUCTOR DE CONSULTAS
+      DB::table('users')->insert([
+        ['name' => 'Juan Perez', 'email' => 'juancito@hotmail.com', 'password' => bcrypt('12345')],
+        ['name' => 'Maria Emilia', 'email' => 'mary@gmail.com', 'password' => bcrypt('12345')]
+      ]);
+
+      //esta es la forma de inserción que da el capitulo MODELOS ORM
+      $u = new User;
+      $u->name = 'Valentin Rahan';
+      $u->email = 'valenRahan@hotmail.com';
+      $u->password = bcrypt('12345');
+      $u->save();
+    }
+
     public function run()
     {
         self::seedCatalog();
         $this->command->info('Tabla catalogo inicializada con datos!');
+
+        self::seedUsers();
+        $this->command->info('Tabla usuarios inicializada con datos!');
     }
 
     private $arrayPeliculas = array(
