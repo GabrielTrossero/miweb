@@ -29,7 +29,7 @@ Route::group(['middleware' => 'auth'], function(){
   Route::get('catalog/show/{id}', 'CatalogController@getShow');
   Route::get('catalog/create', 'CatalogController@getCreate');
   Route::get('catalog/edit/{id}', 'CatalogController@getEdit');
-  Route::get('/home', 'HomeController@index')->name('home');
+  Route::get('/', 'HomeController@index')->name('home');
   Route::post('catalog/create', 'CatalogController@postCreate');
   Route::put('catalog/edit/{id}', 'CatalogController@putEdit');
 });

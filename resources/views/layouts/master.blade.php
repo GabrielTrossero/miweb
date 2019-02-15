@@ -14,6 +14,8 @@
     @include('partials.navbar')
 
     <div class="container">
+      @notification()
+
       @yield('content')
     </div>
 

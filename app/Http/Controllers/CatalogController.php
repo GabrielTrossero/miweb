@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Movie;
+use Notification;
 
 class CatalogController extends Controller
 {
@@ -33,7 +34,13 @@ class CatalogController extends Controller
     $pelicula->director = $request->director;
     $pelicula->poster = $request->poster;
     $pelicula->synopsis = $request->synopsis;
-    $pelicula->save();
+
+    if($pelicula->save()){
+      Notification::success('La pelicula fue agregada con éxito');
+    }
+    else{
+      Notification::error('ERROR: La pelicula NO se agregó');
+    }
 
     return view('catalog.show', array('pelicula' => $pelicula));
   }
@@ -45,7 +52,13 @@ class CatalogController extends Controller
     $pelicula->director = $request->director;
     $pelicula->poster = $request->poster;
     $pelicula->synopsis = $request->synopsis;
-    $pelicula->save();
+
+    if($pelicula->save()){
+      Notification::success('La pelicula fue modificada con éxito');
+    }
+    else{
+      Notification::error('ERROR: La pelicula NO se modificó');
+    }
 
     return view('catalog.edit', array('pelicula' => $pelicula));
   }
